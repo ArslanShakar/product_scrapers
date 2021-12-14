@@ -13,7 +13,7 @@ def clean(text):
 
 def get_discount_percentage(item):
     if item['regular_price'] > item['sale_price']:
-        return round(((item['sale_price'] / item['regular_price']) * 100), 2)
+        return round(((item['regular_price'] - item['sale_price']) / item['regular_price'] * 100), 2)
     return 0
 
 
@@ -21,7 +21,7 @@ def update_discount_percentage(item):
     item['discount_percentage'] = 0
 
     if item['regular_price'] > item['sale_price']:
-        item['discount_percentage'] = round(((item['sale_price'] / item['regular_price']) * 100), 2)
+        item['discount_percentage'] = round(((item['regular_price'] - item['sale_price']) / item['regular_price'] * 100), 2)
 
 
 def retry_invalid_response(callback):

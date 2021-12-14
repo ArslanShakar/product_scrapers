@@ -59,15 +59,18 @@
 #         'sec-fetch-dest': 'document',
 #         'accept-language': 'en-US,en;q=0.9',
 #         'X-Crawlera-Session': 'create',
-#         'X-Crawlera-Cookies': 'disable'
+#         # 'X-Crawlera-Cookies': 'disable'
 #     }
 #
 #     def start_requests(self):
-#         yield Request(self.deals_url, headers=self.headers)
+#         yield Request(self.base_url, headers=self.headers)
 #
 #     def parse(self, response):
+#         return Request(self.deals_url, callback=self.parse_deals, headers=self.headers)
+#
+#     def parse_deals(self, response):
 #         product_selectors = response.css('.mb1.ph1.pa0-xl.bb.b--near-white.w-25')
-#         for sel in product_selectors[:]:
+#         for sel in product_selectors[:1]:
 #             item = {}
 #             item['title'] = self.get_title(sel)
 #             item['main_image_url'] = self.get_image_url(sel)
@@ -80,6 +83,7 @@
 #             meta['item'] = item
 #             yield Request(item["product_url"], callback=self.parse_details, headers=self.headers, meta=meta)
 #
+#         print(response.css('a[aria-label="Next Page"]::attr(href)').getall())
 #         yield from response.follow_all(css='a[aria-label="Next Page"]', headers=self.headers, meta=req_meta)
 #
 #     def parse_details(self, response):

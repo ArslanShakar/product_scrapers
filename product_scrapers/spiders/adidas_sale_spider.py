@@ -33,10 +33,10 @@ class AdidasSaleSpider(Spider):
     ]
 
     custom_settings = {
-        'FEED_FORMAT': 'csv',
-        'FEED_URI': output_file_name,
-        'FEED_EXPORT_FIELDS': csv_headers,
-        # 'CONCURRENT_REQUESTS': 50,
+        # 'FEED_FORMAT': 'csv',
+        # 'FEED_URI': output_file_name,
+        # 'FEED_EXPORT_FIELDS': csv_headers,
+        'CONCURRENT_REQUESTS': 32,
         'CRAWLERA_ENABLED': True,
         'CRAWLERA_APIKEY': crawlera_api_key,
 
